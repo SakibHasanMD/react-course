@@ -12,8 +12,8 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
 
-      function CounterButton() {
-        const [count, setCount] = React.useState(0);
+      function CounterButton({count, setCount}) {
+        
         function buttonClicked() {
         setCount(count + 1);
         console.log('Button clicked!');        
@@ -29,12 +29,12 @@
 
 
       function App() {
-        
+        const [count, setCount] = React.useState(0);
           return (
             <>
-              <CounterButton/>
-              <CounterButton/>
-              
+              <CounterButton count={count} setCount={setCount} />
+              <CounterButton count={count} setCount={setCount} />
+              <button onClick={() => setCount(0)}>Reset</button>
             </>
         );
 
