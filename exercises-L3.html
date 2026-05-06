@@ -12,35 +12,65 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
 
-      function CounterButton({count, setCount}) {
+    //   function CounterButton({ count, setCount}) {
         
-        function buttonClicked() {
-        setCount(count + 1);
-        console.log('Button clicked!');        
-      }
+    //     function buttonClicked() {
+    //     setCount(count + 1);
+    //     console.log('Button clicked!');        
+    //   }
 
-      return(
-        <>
-          <button onClick={() => buttonClicked({count, setCount})}>Clicked {count} {count < 1 ? 'time' : 'times'}</button>
+    //   return(
+    //     <>
+    //       <button onClick={() => buttonClicked({count, setCount})}>Clicked {count} {count < 1 ? 'time' : 'times'}</button>
           
+    //       </>
+    //     );
+    //   }
+
+
+    //   function App() {
+    //     const [count, setCount] = React.useState(0);
+    //       return (
+    //         <>
+    //           <CounterButton count={count} setCount={setCount} />
+    //           <CounterButton count={count} setCount={setCount} />
+    //           <button onClick={() => setCount(0)}>Reset</button>
+    //         </>
+    //     );
+
+    
+    // }
+      
+    function SaveInputText(){
+      const [currentText , setCurrentText]= React.useState('');
+
+        function saveInputText(event){ 
+            
+            setCurrentText(event.target.value);
+            console.log(event.target.value);
+          }
+
+          return(
+            <>
+            <input onChange={saveInputText} value={currentText}/>
+            <button onClick={() => setCurrentText('')} >Reset</button>
+            <button onClick={() => setCurrentText('John Doe')}>Example</button>
+            <p>Hello {currentText}</p> 
+            
+            </>
+          );
+        }
+
+      function App(){
+        
+
+        return (
+          <>
+          
+          <SaveInputText />
           </>
         );
       }
-
-
-      function App() {
-        const [count, setCount] = React.useState(0);
-          return (
-            <>
-              <CounterButton count={count} setCount={setCount} />
-              <CounterButton count={count} setCount={setCount} />
-              <button onClick={() => setCount(0)}>Reset</button>
-            </>
-        );
-
-    
-    }
-
 
       const container = document.querySelector('.js-container');
       ReactDOM.createRoot(container).render(<App/>); 
