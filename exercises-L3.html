@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise 3</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+    
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function CounterButton() {
+        const [count, setCount] = React.useState(0);
+        function buttonClicked() {
+        setCount(count + 1);
+        console.log('Button clicked!');        
+      }
+
+      return(
+        <>
+          <button onClick={() => buttonClicked({count, setCount})}>Clicked {count} {count < 1 ? 'time' : 'times'}</button>
+          
+          </>
+        );
+      }
+
+
+      function App() {
+        
+          return (
+            <>
+              <CounterButton/>
+              <CounterButton/>
+              
+            </>
+        );
+
+    
+    }
+
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App/>); 
+    </script>
+  </body>
+</html>   
