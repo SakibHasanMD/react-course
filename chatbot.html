@@ -18,8 +18,18 @@
 
          function saveInputText(event){ 
           setInputText(event.target.value);
+           }
+
+         function checkKey(event){ 
+          if(event.key === 'Enter'){
+            sendMessage();
            } 
-          function sendMessage() {
+          if(event.key === 'Escape'){
+            setInputText('');
+           }
+          }
+
+          async function sendMessage() {
             const newChatMessages= [
             ...chatMessages,
             {
@@ -30,8 +40,8 @@
           ];
 
              setChatMessages(newChatMessages);
-
-          const response = Chatbot.getResponse(inputText);
+             setInputText('');
+           const response = await Chatbot.getResponseAsync(inputText);
           setChatMessages([
             ...newChatMessages,
             {
@@ -40,7 +50,7 @@
               id: crypto.randomUUID()
             }
           ]);
-          setInputText('');
+          
          } 
           
       return (
@@ -50,6 +60,7 @@
           size="50"
           onChange={saveInputText}
           value={inputText}
+          onKeyDown={checkKey}
           />
         <button
          onClick={sendMessage} 
