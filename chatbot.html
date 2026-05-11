@@ -2,6 +2,79 @@
 <html>
   <head>
     <title>Chatbot</title>
+    <style>
+      body {
+        font-family: Arial;
+       
+      }
+      .send-msg-button {
+        margin-left: 10px;
+        padding: 8px 20px;
+        font-size: 15px;
+        background-color:darkgreen;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .chat-input {
+        padding: 7px;
+        font-size: 16px;
+        border: 1px solid #666666;
+        border-radius: 5px;
+      }
+      .chat-input-container {
+        display:flex;
+        margin-bottom: 20px;
+      }
+
+      .app-container {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+
+
+      }
+      .chat-message-user {
+        display: flex;
+        justify-content: end;
+        margin-bottom: 10px;
+
+        
+      }
+
+      .chat-message-robot {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+
+      }
+
+      .chat-message-text {
+        max-width: 60%;
+        padding: 10px;
+        border-radius: 10px;
+        background-color:azure;
+        margin: 5px;
+        border: #cac8c8 solid 1px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .chat-message-profile {
+        width: 50px;
+        height: 50px;
+      }
+      .chat-messages-container {
+        flex-grow: 1;
+        padding: 20px;
+        overflow: scroll;
+        scrollbar-width: none;
+      }
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -70,18 +143,19 @@
          } 
           
       return (
-        <>
+        <div className="chat-input-container">
         <input 
+          className="chat-input"
           placeholder="Send a Message to Chatbot" 
           size="50"
           onChange={saveInputText}
           value={inputText}
           onKeyDown={checkKey}
           />
-        <button
+        <button className="send-msg-button"
          onClick={sendMessage} 
         >Send</button>
-        </>
+        </div>
       );
       } 
 
@@ -100,22 +174,30 @@
         // }
         
         return (
-          <div>
+          <div className={sender === 'user' ? 'chat-message-user' : 'chat-message-robot'}>
               {sender === 'robot' && (
-                <img src="robot.png" width="50" height="50" alt="Robot" />
+                <img src="robot.png" className="chat-message-profile" alt="Robot" />
               )}
-              {message}
+              <div className="chat-message-text">{message}</div>
               {sender === 'user' && (
-                <img src="user.png" width="50" height="50" alt="User" />
+                <img src="user.png" className="chat-message-profile" alt="User" />
               )}
-          </div>
+          </div> 
         );
         }
       
       function ChatMessages({ chatMessages }){
-        
+        const chatMessagesRef = React.useRef();
+
+        React.useEffect(() => {
+          const containerElem= chatMessagesRef.current;
+          if(containerElem){
+            containerElem.scrollTop = containerElem.scrollHeight;
+           }
+        }, [chatMessages]);
+
           return (
-            <>
+            <div className="chat-messages-container" ref={chatMessagesRef}>
               {chatMessages.map((msg) =>{
                 return (
                   <ChatMessage 
@@ -125,7 +207,7 @@
                     />
                 );
                 })}
-            </>
+            </div>
           );
         
 
@@ -139,16 +221,17 @@
 
        
           return (
-            <>
+            <div className="app-container">
+              
+              <ChatMessages
+              chatMessages={chatMessages}
+              />
               <ChatInput 
               chatMessages={chatMessages}
               setChatMessages={setChatMessages}
               />
-              <ChatMessages
-              chatMessages={chatMessages}
-              />
           
-            </>
+            </div>
         );
 
     
