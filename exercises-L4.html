@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot</title>
+    <style>
+      body {
+        font-family: Arial;
+      }
+      .button-on {
+        background-color: rgb(25, 135, 84);
+        padding: 10px 15px;
+        border: none;
+        border-radius: 15px;
+        color: white
+      }
+
+      .button-off {
+        background-color: rgb(220, 53, 69);
+        padding: 10px 15px;
+        border: none;
+        border-radius: 15px;
+        color: white;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+    
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      function ButtonLession () {
+       const [ isButtonOn, setisButtonOn] = React.useState(false);
+        function handleButtonClick() {
+          setisButtonOn(!isButtonOn);
+        }
+          return (
+            <button onClick={handleButtonClick} className={isButtonOn ? 'button-on' : 'button-off'}>
+              {isButtonOn ? 'ON' : 'OFF'}
+            </button>
+          );
+      }
+   
+      function App() {
+         return (
+             <>
+               <ButtonLession />
+             </>
+      );
+    }
+
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App/>); 
+    </script>
+  </body>
+</html>   
