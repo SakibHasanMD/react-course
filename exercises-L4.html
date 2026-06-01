@@ -6,7 +6,7 @@
       body {
         font-family: Arial;
       }
-      .button-on {
+      /* .button-on {
         background-color: rgb(25, 135, 84);
         padding: 10px 15px;
         border: none;
@@ -20,8 +20,23 @@
         border: none;
         border-radius: 15px;
         color: white;
+      } */
+
+      .btn-primary {
+        background-color: rgb(57, 24, 248);
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        color: white;
       }
-    
+      .inputfield {
+        padding: 10px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+      }
     </style>
   </head>
   <body>
@@ -34,23 +49,49 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
 
-      function ButtonLession () {
-       const [ isButtonOn, setisButtonOn] = React.useState(false);
-        function handleButtonClick() {
-          setisButtonOn(!isButtonOn);
-        }
-          return (
-            <button onClick={handleButtonClick} className={isButtonOn ? 'button-on' : 'button-off'}>
-              {isButtonOn ? 'ON' : 'OFF'}
-            </button>
-          );
-      }
+      // function ButtonLession () {
+      //  const [ isButtonOn, setisButtonOn] = React.useState(false);
+      //   function handleButtonClick() {
+      //     setisButtonOn(!isButtonOn);
+      //   }
+      //     return (
+      //       <button onClick={handleButtonClick} className={isButtonOn ? 'button-on' : 'button-off'}>
+      //         {isButtonOn ? 'ON' : 'OFF'}
+      //       </button>
+      //     );
+      // }
    
+      function SignInForm () {
+
+        const [showPassword, setShowPassword] = React.useState(true);
+
+        function showhidePassword() {
+           setShowPassword(!showPassword);
+        }
+
+        return (
+          <>
+        <input className="inputfield" type="email" Placeholder="Email" />
+        <div>
+          <input className="inputfield" type={showPassword ? "password" : "text "} Placeholder="Password" />
+          <button onClick={showhidePassword}>{showPassword ? 'Show' : 'Hide'}</button>
+        </div>
+        <br/>
+        <button className="btn-primary"> Login </button> <button className="btn-primary"> Sign Up </button>
+        </>
+      );
+
+      }
       function App() {
          return (
-             <>
-               <ButtonLession />
-             </>
+            //  <>
+            //    <ButtonLession />
+            //  </>
+
+            <>
+            <h1>Hello, Welcom to my website</h1>
+            <SignInForm />
+            </>
       );
     }
 
