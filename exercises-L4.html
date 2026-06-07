@@ -80,21 +80,44 @@
       //   </>
       // );
       // }
-      function HandleTime() {
-          const [currentTime , setcurrentTime]= React.useState(dayjs().format('HH:mm:ss'));
-          React.useEffect(() => {
-            const timer = setInterval(() => {
-              setcurrentTime(dayjs().format('HH:mm:ss'));
-            }, 1000);
-          }, console.log('Run Code'));
+      // function HandleTime() {
+      //     const [currentTime , setcurrentTime]= React.useState(dayjs().format('HH:mm:ss'));
+      //     React.useEffect(() => {
+      //       const timer = setInterval(() => {
+      //         setcurrentTime(dayjs().format('HH:mm:ss'));
+      //       }, 1000);
+      //     }, console.log('Run Code'));
+      //     return (
+      //       <div>
+      //         Current Time: {currentTime}
+      //       </div>
+      //     );
+      //   }
 
-
-          return (
-            <div>
-              Current Time: {currentTime}
-            </div>
-          );
+      function CounterButton() {
+        const [count, setCount] = React.useState(0);
+        const buttonRef = React.useRef();
+        
+        function autoClick() {
+          setInterval(() => { const buttonElem = buttonRef.current;
+            if (buttonElem) {
+              buttonElem.click();
+            }}, 1000);
         }
+
+        function buttonClicked() {
+        setCount(count + 1);
+        console.log('Button clicked!');        
+      }
+
+      return(
+        <>
+          <button ref={buttonRef} onClick={buttonClicked}>Clicked {count} {count < 2 ? 'time' : 'times'}</button>
+          <button onClick={() => setCount(0)}>Reset</button> 
+          <button onClick={autoClick}>Auto Click</button>
+          </>
+        );
+      }
 
 
       function App() {
@@ -108,8 +131,12 @@
             // <SignInForm />
             // </>
 
+            // <>
+            // <HandleTime />
+            // </>
+
             <>
-            <HandleTime />
+            <CounterButton />
             </>
       );
     }
