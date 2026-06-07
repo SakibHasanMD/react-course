@@ -5,6 +5,7 @@
     <style>
       body {
         font-family: Arial;
+        margin: 0;
       }
       /* .button-on {
         background-color: rgb(25, 135, 84);
@@ -22,7 +23,7 @@
         color: white;
       } */
 
-      .btn-primary {
+      /* .btn-primary {
         background-color: rgb(57, 24, 248);
         padding: 10px 15px;
         border: none;
@@ -36,6 +37,24 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         width: 200px;
+      } */
+
+      .CounterButton {
+        background-color: rgb(25, 135, 84);
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        margin-right: 5px;
+      }
+
+      .flexbox {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        height: 100vh;
+        align-items: center;
+        background-color: rgb(222, 222, 222);
       }
     </style>
   </head>
@@ -111,11 +130,11 @@
       }
 
       return(
-        <>
-          <button ref={buttonRef} onClick={buttonClicked}>Clicked {count} {count < 2 ? 'time' : 'times'}</button>
-          <button onClick={() => setCount(0)}>Reset</button> 
-          <button onClick={autoClick}>Auto Click</button>
-          </>
+        <div className="flexbox">
+          <button className="CounterButton" onClick={buttonClicked} ref={buttonRef}>Clicked {count} {count < 2 ? 'time' : 'times'}</button>
+          <button className="CounterButton" onClick={() => setCount(0)}>Reset</button> 
+          <button className="CounterButton" onClick={autoClick}>Auto Click</button>
+          </div>
         );
       }
 
