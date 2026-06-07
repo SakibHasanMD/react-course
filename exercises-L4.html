@@ -44,9 +44,8 @@
     
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
-    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
-
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
     <script type="text/babel">
 
       // function ButtonLession () {
@@ -61,36 +60,56 @@
       //     );
       // }
    
-      function SignInForm () {
+      // function SignInForm () {
 
-        const [showPassword, setShowPassword] = React.useState(true);
+      //   const [showPassword, setShowPassword] = React.useState(true);
 
-        function showhidePassword() {
-           setShowPassword(!showPassword);
+      //   function showhidePassword() {
+      //      setShowPassword(!showPassword);
+      //   }
+
+      //   return (
+      //     <>
+      //   <input className="inputfield" type="email" Placeholder="Email" />
+      //   <div>
+      //     <input className="inputfield" type={showPassword ? "password" : "text "} Placeholder="Password" />
+      //     <button onClick={showhidePassword}>{showPassword ? 'Show' : 'Hide'}</button>
+      //   </div>
+      //   <br/>
+      //   <button className="btn-primary"> Login </button> <button className="btn-primary"> Sign Up </button>
+      //   </>
+      // );
+      // }
+      function HandleTime() {
+          const [currentTime , setcurrentTime]= React.useState(dayjs().format('HH:mm:ss'));
+          React.useEffect(() => {
+            const timer = setInterval(() => {
+              setcurrentTime(dayjs().format('HH:mm:ss'));
+            }, 1000);
+          }, console.log('Run Code'));
+
+
+          return (
+            <div>
+              Current Time: {currentTime}
+            </div>
+          );
         }
 
-        return (
-          <>
-        <input className="inputfield" type="email" Placeholder="Email" />
-        <div>
-          <input className="inputfield" type={showPassword ? "password" : "text "} Placeholder="Password" />
-          <button onClick={showhidePassword}>{showPassword ? 'Show' : 'Hide'}</button>
-        </div>
-        <br/>
-        <button className="btn-primary"> Login </button> <button className="btn-primary"> Sign Up </button>
-        </>
-      );
 
-      }
       function App() {
          return (
             //  <>
             //    <ButtonLession />
             //  </>
 
+            // <>
+            // <h1>Hello, Welcom to my website</h1>
+            // <SignInForm />
+            // </>
+
             <>
-            <h1>Hello, Welcom to my website</h1>
-            <SignInForm />
+            <HandleTime />
             </>
       );
     }
